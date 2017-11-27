@@ -16,7 +16,7 @@ class WhichExercise extends Question {
         I want to do
         <input value={this.props.answers.exercise} name="which_exercise" onChange={this.handleChange.bind(this)}/>
         starting at 
-        <input value={this.props.answers.start_weight} type='number' name='start_weight' onChange={this.handleChange.bind(this)}/>
+        <input value={this.props.answers.start_weight} type="number" name="start_weight" onChange={this.handleChange.bind(this)}/>
         {unit}
       </label>
     );

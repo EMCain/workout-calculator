@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 
 class JSONField extends Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        'program': props.program
-      };
-    }
+    // constructor(props){
+    //   super(props);
+    //   this.state = {
+    //     'program': props.program
+    //   };
+    // }
   
    render() {
-     const program = this.state.program;
      return (
-       <textarea name='program_json' value={JSON.stringify(program, undefined, 4)}/>
+       <textarea 
+         id='program_json' 
+         name='program_json' 
+         // value={JSON.stringify(this.props.program, undefined, 4)}
+         value={this.props.value}
+         onChange={this.props.handleJSONChange.bind(this)}
+         className={this.props.errors ? 'error' : ''}
+        />
      );
    }
 }

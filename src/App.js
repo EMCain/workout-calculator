@@ -11,23 +11,23 @@ class Workout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      'program': props.program
+      'program': props.program,
+      'programJSON': JSON.stringify(props.program, undefined, 4),
+      'JSONerrors': false
     }
   }
   
   handleAnswerChange(fieldset_id) {
-    // TODO generalize this
-    let fieldset = document.getElementById(fieldset_id); 
-    if (!fieldset) {
-      return;
-    }
-    let section = fieldset.dataset.section;
+    const fieldset = document.getElementById(fieldset_id); 
+    if (!fieldset) return;
+    
+    const section = fieldset.dataset.section;
     let section_data = {};
 
     let program = this.state.program;
     
     // child elements within the fieldset (double nesting because React is weird)
-    let children = [...fieldset.children[0].children];
+    const children = [...fieldset.children[0].children];
     
     children.forEach(function(child) {
       if (child instanceof HTMLInputElement) {
@@ -39,7 +39,27 @@ class Workout extends Component {
     this.setState({
         'program': program
     });
-    console.log(this.state);
+  }
+
+  handleJSONChange() {
+    const json = document.getElementById('program_json'); 
+    if (!json) return;
+    
+    try {
+      const program = JSON.parse(json.value);
+      this.setState({
+        'program': program,
+        'JSONerrors': false
+      });
+    } catch (e) {
+      this.setState({
+        'JSONerrors': e.message
+      });
+    } finally {
+      this.setState({
+        'programJSON': json.value
+      })
+    }
   }
   
   render() {
@@ -51,8 +71,18 @@ class Workout extends Component {
             handleAnswerChange={this.handleAnswerChange.bind(this)}
           />
         </fieldset>
-        <JSONField program={this.state.program}/>
-      
+        <JSONField 
+          value={this.state.programJSON} 
+          errors={this.state.JSONerrors}
+          handleJSONChange={this.handleJSONChange.bind(this)}
+        />
+        {this.state.JSONerrors && 
+          <label for="program_json" className="error">
+            Make sure you end up with a valid input format to avoid these errors:
+             <br/>
+            {this.state.JSONerrors}
+          </label>
+        }
       </div>
     );
   }
