@@ -1,0 +1,27 @@
+{
+  "which_exercise": {
+      "exercise": "bench press", 
+      "start_weight": 45
+  },
+  "sets": 5, 
+  "reps": 5,
+  "changes": {
+    "increase": {
+      "amount": 5, 
+      "interval": 1
+    }, 
+    "except": {
+      "condition": {
+        "missed_reps": 1
+      }
+    }, 
+    "decrease": {
+      "condition": {
+        "missed_sets": 1, 
+        "missed_reps": 3, 
+        "operator": "OR"
+      },
+      "amount": 5
+    }
+  }
+}
