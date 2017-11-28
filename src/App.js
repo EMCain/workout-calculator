@@ -31,7 +31,18 @@ class Workout extends Component {
     
     children.forEach(function(child) {
       if (child instanceof HTMLInputElement) {
-          section_data[child.name] = child.value;
+          let value = child.value;
+        
+          switch(child.type) {
+            case 'number': 
+              if (value.substring('.' !== -1)) {
+                value = parseFloat(value);
+              } else {
+                value = parseInt(value);
+              }
+            }
+        
+          section_data[child.name] = value;
       }
     });
     program[section] = section_data;
