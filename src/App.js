@@ -37,7 +37,8 @@ class Workout extends Component {
     program[section] = section_data;
 
     this.setState({
-        'program': program
+        'program': program,
+        'programJSON': JSON.stringify(program, undefined, 4)
     });
   }
 
@@ -53,6 +54,7 @@ class Workout extends Component {
       });
     } catch (e) {
       this.setState({
+        // If JSON is invalid, don't try to set program based on it
         'JSONerrors': e.message
       });
     } finally {
