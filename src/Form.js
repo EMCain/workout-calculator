@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
 
-class Question extends Component {
-  handleChange(event) {
-    console.log('event target', event.target);
-    this.props.handleAnswerChange(event.target.parentNode.parentNode.id);
-  }
-}
-
-class WhichExercise extends Question {
-
-  render () {
-    const unit = 'lb'; // TODO user should set this globally (not per exercise) 
-    return (
+const WhichExercise = props => (
       <label>
         I want to do
-        <input value={this.props.answers.exercise} name="which_exercise" onChange={this.handleChange.bind(this)}/>
+        <input value={props.answers.exercise} name="exercise" onChange={props.handleAnswerChange}/>
         starting at 
-        <input value={this.props.answers.start_weight} type="number" name="start_weight" onChange={this.handleChange.bind(this)}/>
-        {unit}
+        <input value={props.answers.start_weight} type="number" name="start_weight" onChange={props.handleAnswerChange}/>
+        lb.
       </label>
-    );
-  }
-}
+    )
 
-export {Question, WhichExercise};
+const HowMuch = props => (
+      <label>
+        I want to do 
+        <input 
+          value={props.answers.sets}
+          name="sets"
+          type="number"
+          onChange={props.handleAnswerChange}
+        />
+        sets of 
+        <input
+          value={props.answers.reps}
+          name="reps"
+          type="number"
+          onChange={props.handleAnswerChange}
+        />
+        repetitions (reps). 
+      </label>
+);
+
+export {WhichExercise, HowMuch};

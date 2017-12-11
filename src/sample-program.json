@@ -3,8 +3,10 @@
       "exercise": "bench press", 
       "start_weight": 45
   },
-  "sets": 5, 
-  "reps": 5,
+  "how_much":{
+    "sets": 5, 
+    "reps": 5
+  },
   "changes": {
     "increase": {
       "amount": 5, 

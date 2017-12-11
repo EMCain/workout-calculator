@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {JSONField} from './JSONField.js'
-import {WhichExercise} from './Form.js';
+import {WhichExercise, HowMuch} from './Form.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -17,10 +17,8 @@ class Workout extends Component {
     }
   }
   
-  handleAnswerChange(fieldset_id) {
-    const fieldset = document.getElementById(fieldset_id); 
-    if (!fieldset) return;
-    
+  handleAnswerChange(event) {
+    const fieldset = event.target.parentNode.parentNode;
     const section = fieldset.dataset.section;
     let section_data = {};
 
@@ -53,8 +51,9 @@ class Workout extends Component {
     });
   }
 
-  handleJSONChange() {
-    const json = document.getElementById('program_json'); 
+  handleJSONChange(event) {
+    // const json = document.getElementById('program_json'); 
+    const json = event.target;
     if (!json) return;
     
     try {
@@ -81,13 +80,19 @@ class Workout extends Component {
         <fieldset id="which_exercise" data-section="which_exercise">
           <WhichExercise
             answers={this.state.program.which_exercise}
-            handleAnswerChange={this.handleAnswerChange.bind(this)}
+            handleAnswerChange={(e) => this.handleAnswerChange(e)}
+          />
+        </fieldset>
+        <fieldset id="how_much" data-section="how_much">
+          <HowMuch
+            answers={this.state.program.how_much}
+            handleAnswerChange={(e) => this.handleAnswerChange(e)}
           />
         </fieldset>
         <JSONField 
           value={this.state.programJSON} 
           errors={this.state.JSONerrors}
-          handleJSONChange={this.handleJSONChange.bind(this)}
+          handleJSONChange={(e) => this.handleJSONChange(e)}
         />
         {this.state.JSONerrors && 
           <label for="program_json" className="error">

@@ -1,3 +1,14 @@
+## Workout App
+
+This is a React app for strength training workout programming. 
+
+The goal is that users will be able to program their own workout logic using a graphic interface, and to share their workouts via saved JSON strings.
+
+Right now it is just React but I will probably add Redux to it. 
+
+## original README
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
